@@ -58,3 +58,9 @@
 #               interpretations.  Either way, we'll have to keep track of how
 #               many dice roll a 1 and compare that to the total number of dice
 #               rolled.
+#
+#   Implementation ideas.
+#   Good idea would be to implement this as a class that evaluates results of
+#   abstract rolls, so that we can pass in different roll systems--such as pure
+#   RNG for an initial text-based version, or some kind of elaborate Unity engine
+#   physics-derived pseudoreal roll of a dice model.
