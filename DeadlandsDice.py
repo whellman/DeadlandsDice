@@ -65,7 +65,7 @@
 #   RNG for an initial text-based version, or some kind of elaborate Unity engine
 #   physics-derived pseudoreal roll of a dice model.
 
-
+import readline
 import random
 import re
 from enum import Enum
@@ -78,16 +78,25 @@ class ValidDice(Enum):
 
 def rollDice(sides):
     result = random.randint(1, sides)
-    if(result = sides):
+    if(result == sides):
         result += rollDice(sides)
     return result
 
-userString = input("?")
+#main loop
+while True:
+    userString = input("Enter dice expression: ")
 
-m = re.fullmatch(r"^(\d{,2})[dD](\d{1,2})$", userString)
+    m = re.fullmatch(r"^(\d{,2})[dD](\d{1,2})$", userString)
 
-numberOfDice = m.group(1)
-sidednessOfDice = m.group(2)
+    numberOfDice = int(m.group(1))
+    sidednessOfDice = int(m.group(2))
 
-for poolMember in range(numberOfDice):
-    
+    biggest = 0
+
+    for poolMember in range(numberOfDice):
+        result = rollDice(sidednessOfDice)
+        print("Roll " + str(poolMember+1) + ": " + str(result))
+        if(result > biggest):
+            biggest = result
+
+print("Final skill roll result: " + str(biggest))
