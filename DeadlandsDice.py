@@ -92,18 +92,27 @@ while True:
 
     m = re.fullmatch(r"^(\d{,3})[dD](\d{1,2})$", userString)
 
-    numberOfDice = int(m.group(1))
-    sidednessOfDice = int(m.group(2))
-
+    try:
+        numberOfDice = int(m.group(1))
+        sidednessOfDice = int(m.group(2))
+    except AttributeError:
+        continue
+        
     biggest = 0
+    onesCount = 0
 
     for poolMember in range(numberOfDice):
         result = rollDice(sidednessOfDice)
         if(result > sidednessOfDice):
             print("Roll " + str(poolMember+1) + ": " + Fore.GREEN + str(result) + Style.RESET_ALL)
         else:
+            if(result == 1):
+                onesCount += 1
             print("Roll " + str(poolMember+1) + ": " + str(result))
         if(result > biggest):
             biggest = result
 
-    print(Fore.RED + "Final skill roll result: " + str(biggest) + Style.RESET_ALL)
+    if(onesCount > (numberOfDice/2)):
+        print(Fore.RED + "!!!  BUST  !!!" + Style.RESET_ALL)
+    else:
+        print(Fore.GREEN + "Final skill roll result: " + str(biggest) + Style.RESET_ALL)
