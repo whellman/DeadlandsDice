@@ -64,3 +64,25 @@
 #   abstract rolls, so that we can pass in different roll systems--such as pure
 #   RNG for an initial text-based version, or some kind of elaborate Unity engine
 #   physics-derived pseudoreal roll of a dice model.
+
+
+import random
+import re
+from enum import Enum
+class ValidDice(Enum):
+    D4 = 4
+    D6 = 6
+    D8 = 8
+    D10 = 10
+    D12 = 12
+
+
+userString = input("?")
+
+m = re.fullmatch(r"^(\d{,2})[dD](\d{1,2})$", userString)
+
+numberOfDice = m.group(1)
+sidednessOfDice = m.group(2)
+
+print("I think you want to roll a pool of " + numberOfDice + " individual " +
+      sidednessOfDice + "-sided dice.")
