@@ -89,7 +89,8 @@ def rollDice(sides):
 #main loop
 while True:
     userString = input("Enter dice expression: ")
-
+    if(re.fullmatch(r"^quit$", userString)):
+        break
     m = re.fullmatch(r"^(\d{,3})[dD](\d{1,2})$", userString)
 
     try:
@@ -97,7 +98,7 @@ while True:
         sidednessOfDice = int(m.group(2))
     except AttributeError:
         continue
-        
+
     biggest = 0
     onesCount = 0
 
