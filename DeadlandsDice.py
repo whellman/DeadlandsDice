@@ -68,6 +68,10 @@
 import readline
 import random
 import re
+
+from colorama import Fore
+from colorama import Style
+
 from enum import Enum
 class ValidDice(Enum):
     D4 = 4
@@ -95,8 +99,11 @@ while True:
 
     for poolMember in range(numberOfDice):
         result = rollDice(sidednessOfDice)
-        print("Roll " + str(poolMember+1) + ": " + str(result))
+        if(result > sidednessOfDice):
+            print("Roll " + str(poolMember+1) + ": " + Fore.GREEN + str(result) + Style.RESET_ALL)
+        else:
+            print("Roll " + str(poolMember+1) + ": " + str(result))
         if(result > biggest):
             biggest = result
 
-print("Final skill roll result: " + str(biggest))
+    print(Fore.RED + "Final skill roll result: " + str(biggest) + Style.RESET_ALL)
