@@ -90,7 +90,7 @@ def rollDice(sides):
 while True:
     userString = input("Enter dice expression: ")
 
-    m = re.fullmatch(r"^(\d{,2})[dD](\d{1,2})$", userString)
+    m = re.fullmatch(r"^(\d{,3})[dD](\d{1,2})$", userString)
 
     numberOfDice = int(m.group(1))
     sidednessOfDice = int(m.group(2))
