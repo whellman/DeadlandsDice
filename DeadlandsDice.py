@@ -76,6 +76,13 @@ class ValidDice(Enum):
     D10 = 10
     D12 = 12
 
+def rollDice(sides):
+    result = random.randint(1, sides)
+    if(result = sides):
+        ace = true
+    else:
+        ace = false
+    return (result, ace)
 
 userString = input("?")
 
@@ -83,6 +90,3 @@ m = re.fullmatch(r"^(\d{,2})[dD](\d{1,2})$", userString)
 
 numberOfDice = m.group(1)
 sidednessOfDice = m.group(2)
-
-print("I think you want to roll a pool of " + numberOfDice + " individual " +
-      sidednessOfDice + "-sided dice.")
