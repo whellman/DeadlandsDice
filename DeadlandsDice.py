@@ -50,9 +50,8 @@
 #               is obtained when--depending on the interpretation being used--
 #               50% or >50% of the dice come up as 1.
 #
-#               FIXME: Cite pages from most recent version to support each
-#                   interpretation. Also probably compare the Savage Worlds
-#                   mechanic, if it exists.
+#               From "Deadlands 20th Anniversary Edition" (2016) Hensley et al:
+#                   pg 28: 
 #
 #           We want to somehow allow for the user to pick from both
 #               interpretations.  Either way, we'll have to keep track of how
@@ -79,6 +78,15 @@ class ValidDice(Enum):
     D8 = 8
     D10 = 10
     D12 = 12
+
+class TargetNumbers(Enum):
+    Foolproof = 3
+    Fair = 5
+    Onerous = 7
+    Hard = 9
+    Incredible = 11
+
+
 
 def rollDice(sides):
     result = random.randint(1, sides)
