@@ -14,6 +14,7 @@ if args.halfbust:
 else:
     useGreaterOrEqual = False
 
+# These aren't used yet because nonstandard dice are useful for testing.
 from enum import Enum
 class ValidDice(Enum):
     D4 = 4
@@ -21,7 +22,8 @@ class ValidDice(Enum):
     D8 = 8
     D10 = 10
     D12 = 12
-
+# This should be used in the future to automatically describe the success of
+# the roll and the number of raises, if any, for different TN difficulties.
 class TargetNumbers(Enum):
     Foolproof = 3
     Fair = 5
@@ -37,6 +39,7 @@ def rollDice(sides):
         result += rollDice(sides)
     return result
 
+print("Enter 'quit' in dice expression prompt to stop")
 #main loop
 while True:
     userString = input("Enter dice expression: ")
