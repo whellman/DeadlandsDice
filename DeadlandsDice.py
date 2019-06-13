@@ -7,7 +7,7 @@ from colorama import Style
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument("--halfbust", help="going bust merely requires 50% of dice")
+parser.add_argument("--halfbust", help="going bust merely requires 50%% of dice")
 args = parser.parse_args()
 if args.halfbust:
     useGreaterOrEqual = True
