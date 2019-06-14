@@ -29,16 +29,20 @@ class ValidDice(Enum):
 # This should be used in the future to automatically describe the success of
 # the roll and the number of raises, if any, for different TN difficulties.
 class TargetNumbers(Enum):
-    Foolproof = 3
-    Fair = 5
-    Onerous = 7
-    Hard = 9
-    Incredible = 11
+    FOOLPROOF = 3
+    FAIR = 5
+    ONEROUS = 7
+    HARD = 9
+    INCREDIBLE = 11
     @classmethod
     def has_value(cls, value):
         return any(value == item.value for item in cls)
 
-
+# FIXME: This isn't ideal. The most important part of this line for configuring
+# is the word wedged between the periods in the middle of the expression.
+# Previously, the value was tacked on whenever it was needed to grab the tn as int,
+# but the ability to input an arbitrary tn required a change...
+tn = TargetNumbers.FAIR.value
 
 def rollDice(sides):
     result = random.randint(1, sides)
@@ -52,14 +56,31 @@ while True:
     userString = input("Enter dice expression: ")
     if(re.fullmatch(r"^quit$", userString)):
         break
+    # The following is extremely clunky.
+    # FIXME: don't do this in a way that doubles up on the match testing.
+    if(re.fullmatch(r"^tn\s*(\d{1,2})$", userString)):
+        m = re.fullmatch(r"^tn\s*(\d{1,2})$", userString)
+        tn = int(m.group(1))
+        print("Target number set to " + str(tn))
+        continue
     m = re.fullmatch(r"^(\d{,3})[dD](\d{1,2})$", userString)
 
     try:
+        print(m.group(1))
         numberOfDice = int(m.group(1))
+    except AttributeError as ae:
+        # print("Bad input: " + str(ae))
+        continue
+    except ValueError:
+        numberOfDice = 1
+        pass
+
+    try:
         sidednessOfDice = int(m.group(2))
         if not ValidDice.has_value(sidednessOfDice):
-            raise AttributeError('Invalid Type of Dice')
-    except AttributeError:
+            raise AttributeError('Not a valid sidedness of dice!')
+    except AttributeError as ae:
+        print("Bad input: " + str(ae))
         continue
 
     biggest = 0
@@ -87,3 +108,16 @@ while True:
         print(Fore.RED + "!!!  BUST  !!!" + Style.RESET_ALL)
     else:
         print(Fore.GREEN + "Final skill roll result: " + str(biggest) + Style.RESET_ALL)
+        successAndRaise = biggest // tn
+        if(successAndRaise > 2):
+            print(Fore.GREEN + "A success with " + Fore.BLUE +
+                  str(successAndRaise - 1) + " raises " + Fore.GREEN +
+                  "for TN of " + str(tn) + Style.RESET_ALL)
+        elif (successAndRaise > 1):
+            print(Fore.GREEN + "A success with " + Fore.BLUE +
+                  str(successAndRaise - 1) + " raise " + Fore.GREEN +
+                  "for TN of " + str(tn) + Style.RESET_ALL)
+        elif (successAndRaise == 1):
+            print(Fore.GREEN + "A success for TN of " + str(tn) + Style.RESET_ALL)
+        else:
+            print(Fore.RED + "A failure for TN of " + str(tn) + Style.RESET_ALL)
