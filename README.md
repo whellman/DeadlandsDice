@@ -16,4 +16,11 @@ dice in the pool rolling a 1.
 
 Type in the skill roll desired in the normal format of, eg, '3d8'
 
+To change the target number, use 'tn' followed by the new number. Whitespace before
+the new number is optional. Correctly setting the target number for your situation
+allows automatic determination of failure or success, and the number of raises,
+if any.
+
 Type 'quit' to exit the program
+
+![Screenshot](img/screenshot.png)
