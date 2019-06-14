@@ -7,7 +7,8 @@ rolls) from a given pool, with critical failures ('busts') on a majority of 1s.
 
 ## Current Status
 
-Ultra early pre alpha, heavily WIP. Not ready at all.
+Ultra early pre alpha, heavily WIP.  Very marginally more usable than a bowlful
+of dice at the table.
 
 ## Usage
 
