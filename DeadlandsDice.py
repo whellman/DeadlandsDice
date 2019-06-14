@@ -22,6 +22,10 @@ class ValidDice(Enum):
     D8 = 8
     D10 = 10
     D12 = 12
+    @classmethod
+    def has_value(cls, value):
+        return any(value == item.value for item in cls)
+
 # This should be used in the future to automatically describe the success of
 # the roll and the number of raises, if any, for different TN difficulties.
 class TargetNumbers(Enum):
@@ -30,6 +34,9 @@ class TargetNumbers(Enum):
     Onerous = 7
     Hard = 9
     Incredible = 11
+    @classmethod
+    def has_value(cls, value):
+        return any(value == item.value for item in cls)
 
 
 
@@ -50,6 +57,8 @@ while True:
     try:
         numberOfDice = int(m.group(1))
         sidednessOfDice = int(m.group(2))
+        if not ValidDice.has_value(sidednessOfDice):
+            raise AttributeError('Invalid Type of Dice')
     except AttributeError:
         continue
 
