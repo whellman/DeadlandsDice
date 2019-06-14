@@ -63,7 +63,9 @@ while True:
         else:
             if(result == 1):
                 onesCount += 1
-            print("Roll " + str(poolMember+1) + ": " + str(result))
+                print("Roll " + str(poolMember+1) + ": " + Fore.RED + str(result) + Style.RESET_ALL)
+            else:
+                print("Roll " + str(poolMember+1) + ": " + str(result))
         if(result > biggest):
             biggest = result
 
