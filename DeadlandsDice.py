@@ -2,8 +2,10 @@ import readline
 import random
 import re
 
-from colorama import Fore
-from colorama import Style
+from colorama import init
+init()
+
+from colorama import Fore, Style
 
 import argparse
 parser = argparse.ArgumentParser()
