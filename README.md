@@ -12,16 +12,19 @@ of dice at the table.
 
 ## Usage
 
-Pass the argument '--halfbust' to switch bust mechanics to nonmajority 50% of
-dice in the pool rolling a 1.
+### Command-Line Arguments
+* `--halfbust` switches bust mechanics to nonmajority 50% of dice in the pool
+rolling a 1.
+* `--verbose` enables pointlessly-detailed output of full roll series for aces
 
-Type in the skill roll desired in the normal format of, eg, '3d8'
+### Interactive Commands
+Type in the skill roll desired in the normal format of, eg, `3d8`
 
-To change the target number, use 'tn' followed by the new number. Whitespace before
+To change the target number, use `tn` followed by the new number. Whitespace before
 the new number is optional. Correctly setting the target number for your situation
 allows automatic determination of failure or success, and the number of raises,
 if any.
 
-Type 'quit' to exit the program
+Type `quit` to exit the program
 
 ![Screenshot](img/screenshot.png)

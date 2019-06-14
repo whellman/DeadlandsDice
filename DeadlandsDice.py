@@ -10,11 +10,18 @@ from colorama import Fore, Style
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--halfbust", help="going bust merely requires 50%% of dice", action='store_true')
+parser.add_argument("--verbose", help="display full roll series for aces", action='store_true')
+
 args = parser.parse_args()
+
 if args.halfbust:
     useGreaterOrEqual = True
 else:
     useGreaterOrEqual = False
+if args.verbose:
+    verbose = True
+else:
+    verbose = False
 
 # These aren't used yet because nonstandard dice are useful for testing.
 from enum import Enum
@@ -90,7 +97,13 @@ while True:
     for poolMember in range(numberOfDice):
         result = rollDice(sidednessOfDice)
         if(result > sidednessOfDice):
-            print("Roll " + str(poolMember+1) + ": " + Fore.GREEN + str(result) + Style.RESET_ALL)
+            expandedRoll = ""
+            if verbose:
+                acesAndRemainder = divmod(result, sidednessOfDice)
+                for i in range(acesAndRemainder[0]):
+                    expandedRoll += (str(sidednessOfDice) + " + ")
+                expandedRoll += (str(acesAndRemainder[1]) + " = ")
+            print("Roll " + str(poolMember+1) + ": " + expandedRoll + Fore.GREEN + str(result) + Style.RESET_ALL)
         else:
             if(result == 1):
                 onesCount += 1
