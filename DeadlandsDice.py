@@ -66,7 +66,6 @@ while True:
     m = re.fullmatch(r"^(\d{,3})[dD](\d{1,2})$", userString)
 
     try:
-        print(m.group(1))
         numberOfDice = int(m.group(1))
     except AttributeError as ae:
         # print("Bad input: " + str(ae))
